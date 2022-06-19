@@ -1,1 +1,1 @@
-A very simple binary expression tree implementation that can read in postfix and prefix style lists
+A very simple binary expression tree implementation that can read postfix and prefix style lists

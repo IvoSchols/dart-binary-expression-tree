@@ -3,8 +3,9 @@ import 'package:test/test.dart';
 
 void main() {
   //TODO: add failing tests
-  test('fromPrefixNotationListSimple', () {
-    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(['+', 1, 2]);
+
+  test('fromPostfixNotationListSimple', () {
+    BinaryExpressionTree tree = BinaryExpressionTree.fromPostfix([1, 2, '+']);
     expect(tree.root.value, '+');
     expect(tree.root.isLeaf(), false);
 
@@ -19,14 +20,14 @@ void main() {
     expect(tree.root.right?.right, null);
   });
 
-  test('toPrefixNotationListSimple', () {
-    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(['+', 1, 2]);
-    expect(tree.toPreFix(), ['+', 1, 2]);
+  test('toPostfixNotationListSimple', () {
+    BinaryExpressionTree tree = BinaryExpressionTree.fromPostfix([1, 2, '+']);
+    expect(tree.toPostFix(), [1, 2, '+']);
   });
 
-  test('fromPrefixNotationListComplex', () {
-    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(
-        ['+', '+', 'a', '*', 'b', 'c', '*', 'd', '+', 'e', 'f']);
+  test('fromPostfixNotationListComplex', () {
+    BinaryExpressionTree tree = BinaryExpressionTree.fromPostfix(
+        ['a', 'b', 'c', '*', '+', 'd', 'e', 'f', '+', '*', '+']);
 
     expect(tree.root.value, '+');
     expect(tree.root.isLeaf(), false);
@@ -62,10 +63,10 @@ void main() {
     expect(tree.root.right?.right?.right?.isLeaf(), true);
   });
 
-  test('toPrefixNotationComplex', () {
-    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(
-        ['+', '+', 'a', '*', 'b', 'c', '*', 'd', '+', 'e', 'f']);
-    expect(tree.toPreFix(),
-        ['+', '+', 'a', '*', 'b', 'c', '*', 'd', '+', 'e', 'f']);
+  test('toPostfixNotationComplex', () {
+    BinaryExpressionTree tree = BinaryExpressionTree.fromPostfix(
+        ['a', 'b', 'c', '*', '+', 'd', 'e', 'f', '+', '*', '+']);
+    expect(tree.toPostFix(),
+        ['a', 'b', 'c', '*', '+', 'd', 'e', 'f', '+', '*', '+']);
   });
 }

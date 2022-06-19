@@ -7,9 +7,63 @@ class BinaryExpressionTree {
 
   BinaryExpressionTree();
 
+  // Construct an expression tree from a prefix notation list.
+  BinaryExpressionTree.fromPrefix(List<dynamic> prefix) {
+    if (prefix.isEmpty) {
+      throw Exception('Prefix notation list is empty.');
+    }
+
+    Iterator<dynamic> iterator = prefix.iterator;
+    Node? prefixNode = _fromPrefix(prefix, iterator);
+
+    if (prefixNode == null) {
+      throw Exception('Invalid prefix notation');
+    }
+    root = prefixNode;
+  }
+
+  Node? _fromPrefix(List<dynamic> prefix, Iterator<dynamic> iterator) {
+    if (!iterator.moveNext()) {
+      return null;
+    }
+
+    Node? current = Node(iterator.current);
+
+    if (!current.isOperand() && !current.isOperator()) {
+      throw Exception('Invalid prefix notation');
+    }
+
+    if (current.isOperator()) {
+      current.left = _fromPrefix(prefix, iterator);
+      current.right = _fromPrefix(prefix, iterator);
+    }
+
+    return current;
+  }
+
+  // Convert the expression tree to a prefix notation list.
+  List<dynamic> toPreFix() {
+    List<dynamic> prefix = [];
+    _toPrefix(root, prefix);
+    return prefix;
+  }
+
+  void _toPrefix(Node? node, List<dynamic> prefix) {
+    if (node == null) {
+      return;
+    }
+    prefix.add(node.value);
+    _toPrefix(node.left, prefix);
+    _toPrefix(node.right, prefix);
+  }
+
   // Construct an expression tree from a postfix notation list.
   BinaryExpressionTree.fromPostfix(List<dynamic> postfix) {
-    ListQueue<BinaryExpressionTree> listQueue = ListQueue();
+    if (postfix.isEmpty) {
+      throw Exception('Postfix notation list is empty.');
+    }
+
+    ListQueue<Node> listQueue = ListQueue();
 
     Node? postfixNode = _fromPostfix(postfix, listQueue);
 
@@ -19,12 +73,7 @@ class BinaryExpressionTree {
     root = postfixNode;
   }
 
-  Node? _fromPostfix(
-      List<dynamic> postfix, ListQueue<BinaryExpressionTree> listQueue) {
-    if (postfix.isEmpty) {
-      return null;
-    }
-
+  Node? _fromPostfix(List<dynamic> postfix, ListQueue<Node> listQueue) {
     for (int i = 0; i < postfix.length; i++) {
       Node current = Node(postfix[i]);
 
@@ -33,18 +82,14 @@ class BinaryExpressionTree {
       }
 
       if (current.isOperand()) {
-        BinaryExpressionTree currentTree = BinaryExpressionTree();
-        currentTree.root = current;
-        listQueue.add(currentTree);
+        listQueue.add(current);
       } else if (current.isOperator()) {
         if (listQueue.length < 2) {
           throw Exception('Invalid postfix notation');
         }
-        BinaryExpressionTree currentTree = BinaryExpressionTree();
-        currentTree.root = current;
-        current.right = listQueue.removeLast().root;
-        current.left = listQueue.removeLast().root;
-        listQueue.add(currentTree);
+        current.right = listQueue.removeLast();
+        current.left = listQueue.removeLast();
+        listQueue.add(current);
       }
     }
 
@@ -52,7 +97,7 @@ class BinaryExpressionTree {
       throw Exception('Invalid postfix notation');
     }
 
-    return listQueue.removeLast().root;
+    return listQueue.removeLast();
   }
 
   // Convert the expression tree to a postfix notation list.
@@ -76,19 +121,4 @@ class BinaryExpressionTree {
       postfix.add(node.value);
     }
   }
-
-  // Construct a expression tree from a prefix notation list.
-  // The list must be a list of numbers or operators.
-  // The list must be a valid prefix notation list.
-  // BinaryExpressionTree.fromPrefix(List<dynamic> prefix) {
-  //   if (prefix.isEmpty) {
-  //     throw Exception('Prefix notation list is empty.');
-  //   }
-
-  //   if (prefix.length % 2 != 0) {
-  //     throw Exception('Prefix notation list has an odd number of elements.');
-  //   }
-  // }
-
-  // BinaryExpressionTree._fromPrefix(List<dynamic> prefix) {}
 }

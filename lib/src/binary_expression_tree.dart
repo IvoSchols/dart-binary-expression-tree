@@ -35,7 +35,7 @@ class BinaryExpressionTree {
 
     if (current.isOperator()) {
       current.left = _fromPrefix(prefix, iterator);
-      current.right = _fromPrefix(prefix, iterator);
+      if (current.value != "!") current.right = _fromPrefix(prefix, iterator);
     }
 
     return current;
@@ -87,7 +87,7 @@ class BinaryExpressionTree {
         if (listQueue.length < 2) {
           throw Exception('Invalid postfix notation');
         }
-        current.right = listQueue.removeLast();
+        if (current.value != "!") current.right = listQueue.removeLast();
         current.left = listQueue.removeLast();
         listQueue.add(current);
       }

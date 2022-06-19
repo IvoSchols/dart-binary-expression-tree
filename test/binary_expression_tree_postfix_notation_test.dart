@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:binary_expression_tree/binary_expression_tree.dart';
 import 'package:test/test.dart';
 
 void main() {
   //TODO: add failing tests
-
+  //TODO: add boolean tests
   test('fromPostfixNotationListSimple', () {
     BinaryExpressionTree tree = BinaryExpressionTree.fromPostfix([1, 2, '+']);
     expect(tree.root.value, '+');

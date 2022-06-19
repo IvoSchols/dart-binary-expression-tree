@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 
 void main() {
   //TODO: add failing tests
+  //TODO: add boolean tests
   test('fromPrefixNotationListSimple', () {
     BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(['+', 1, 2]);
     expect(tree.root.value, '+');

@@ -19,6 +19,7 @@ class BinaryExpressionTree {
     if (prefixNode == null) {
       throw Exception('Invalid prefix notation');
     }
+
     root = prefixNode;
   }
 
@@ -49,9 +50,8 @@ class BinaryExpressionTree {
   }
 
   void _toPrefix(Node? node, List<dynamic> prefix) {
-    if (node == null) {
-      return;
-    }
+    if (node == null) return;
+
     prefix.add(node.value);
     _toPrefix(node.left, prefix);
     _toPrefix(node.right, prefix);
@@ -108,17 +108,10 @@ class BinaryExpressionTree {
   }
 
   void _toPostFix(Node? node, List<dynamic> postfix) {
-    if (node == null) {
-      return;
-    }
+    if (node == null) return;
 
     _toPostFix(node.left, postfix);
     _toPostFix(node.right, postfix);
-
-    if (node.isOperand()) {
-      postfix.add(node.value);
-    } else {
-      postfix.add(node.value);
-    }
+    postfix.add(node.value);
   }
 }

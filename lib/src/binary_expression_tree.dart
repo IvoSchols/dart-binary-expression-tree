@@ -5,7 +5,7 @@ import 'node.dart';
 class BinaryExpressionTree {
   late Node root;
 
-  BinaryExpressionTree();
+  BinaryExpressionTree({required this.root});
 
   // Construct an expression tree from a prefix notation list.
   BinaryExpressionTree.fromPrefix(List<dynamic> prefix) {

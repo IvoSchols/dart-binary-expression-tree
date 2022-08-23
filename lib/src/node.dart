@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
 class Node<T> {
   final T value;
   Node? left;
   Node? right;
 
-  Node(this.value);
+  Node(this.value, {this.left, this.right});
 
   bool isLeaf() => left == null && right == null;
 

@@ -1,3 +1,7 @@
+## 1.0.3
+- Node: Implemented hasChildren()
+- Node: Implemented addChild(Node node)
+
 ## 1.0.2 
 - Changed constructor of binary expression tree
 - Changed constructor of node

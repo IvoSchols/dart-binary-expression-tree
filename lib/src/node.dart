@@ -5,6 +5,18 @@ class Node<T> {
 
   Node(this.value, {this.left, this.right});
 
+  void addChild(Node child) {
+    if (left == null) {
+      left = child;
+    } else if (right == null) {
+      right = child;
+    } else {
+      throw Exception('Node already has two children');
+    }
+  }
+
+  bool hasChildren() => left != null && right != null;
+
   bool isLeaf() => left == null && right == null;
 
   // Node is operator if is of type Char and contains: +, -, *, /, &&, ||

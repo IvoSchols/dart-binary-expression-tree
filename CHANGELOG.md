@@ -1,3 +1,6 @@
+## 1.0.4
+- BinaryExpressionTree: root may now be null
+
 ## 1.0.3
 - Node: Implemented hasChildren()
 - Node: Implemented addChild(Node node)

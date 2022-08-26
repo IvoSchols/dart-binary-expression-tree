@@ -9,8 +9,8 @@ void main() {
     Node root = Node(null);
     BinaryExpressionTree tree = BinaryExpressionTree(root: root);
     expect(tree.root, equals(root));
-    expect(tree.root.left, equals(null));
-    expect(tree.root.right, equals(null));
+    expect(tree.root!.left, equals(null));
+    expect(tree.root!.right, equals(null));
   });
 
   // Test binary tree with a root and a single leaf node.
@@ -20,8 +20,8 @@ void main() {
     root.left = leaf;
     BinaryExpressionTree tree = BinaryExpressionTree(root: root);
     expect(tree.root, equals(root));
-    expect(tree.root.left, equals(leaf));
-    expect(tree.root.right, equals(null));
-    expect(tree.root.left!.isLeaf(), isTrue);
+    expect(tree.root!.left, equals(leaf));
+    expect(tree.root!.right, equals(null));
+    expect(tree.root!.left!.isLeaf(), isTrue);
   });
 }

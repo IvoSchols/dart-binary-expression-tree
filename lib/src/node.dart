@@ -15,6 +15,13 @@ class Node<T> {
     }
   }
 
+  List<Node> getChildren() {
+    List<Node> children = [];
+    if (left != null) children.add(left!);
+    if (right != null) children.add(right!);
+    return children;
+  }
+
   bool hasChildren() => left != null && right != null;
 
   bool isLeaf() => left == null && right == null;

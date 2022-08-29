@@ -24,4 +24,20 @@ void main() {
     expect(tree.root!.right, equals(null));
     expect(tree.root!.left!.isLeaf(), isTrue);
   });
+
+  test('isOperand', () {
+    Node root = Node(null);
+    Node leaf = Node(1);
+    root.left = leaf;
+    BinaryExpressionTree tree = BinaryExpressionTree(root: root);
+    expect(tree.root!.left!.isOperand(), isTrue);
+  });
+
+  test('isOperator', () {
+    Node root = Node(null);
+    Node leaf = Node('+');
+    root.left = leaf;
+    BinaryExpressionTree tree = BinaryExpressionTree(root: root);
+    expect(tree.root!.left!.isOperator(), isTrue);
+  });
 }

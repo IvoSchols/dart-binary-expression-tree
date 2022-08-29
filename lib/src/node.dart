@@ -28,13 +28,7 @@ class Node<T> {
 
   // Node is operator if is of type Char and contains: +, -, *, /, &&, ||
   bool isOperator() =>
-      value is String &&
-      (value == '+' ||
-          value == '-' ||
-          value == '*' ||
-          value == '/' ||
-          value == '&&' ||
-          value == '||');
+      value is String && const ['+', '-', '*', '/', '&&', '||'].contains(value);
 
   // is numeric or boolean or 'variable'
   bool isOperand() =>

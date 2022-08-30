@@ -45,16 +45,17 @@ class BinaryExpressionTree {
   // Convert the expression tree to a prefix notation list.
   List<dynamic> toPreFix() {
     List<dynamic> prefix = [];
-    _toPrefix(root, prefix);
+
+    callFunctionPreOrder(root, (Node node) => prefix.add(node.value));
     return prefix;
   }
 
-  void _toPrefix(Node? node, List<dynamic> prefix) {
+  void callFunctionPreOrder(Node? node, Function function) {
     if (node == null) return;
 
-    prefix.add(node.value);
-    _toPrefix(node.left, prefix);
-    _toPrefix(node.right, prefix);
+    function(node);
+    callFunctionPreOrder(node.left, function);
+    callFunctionPreOrder(node.right, function);
   }
 
   // Construct an expression tree from a postfix notation list.
@@ -103,15 +104,16 @@ class BinaryExpressionTree {
   // Convert the expression tree to a postfix notation list.
   List<dynamic> toPostFix() {
     List<dynamic> postfix = [];
-    _toPostFix(root, postfix);
+
+    callFunctionPostOrder(root, (Node node) => postfix.add(node.value));
     return postfix;
   }
 
-  void _toPostFix(Node? node, List<dynamic> postfix) {
+  void callFunctionPostOrder(Node? node, Function function) {
     if (node == null) return;
 
-    _toPostFix(node.left, postfix);
-    _toPostFix(node.right, postfix);
-    postfix.add(node.value);
+    callFunctionPostOrder(node.left, function);
+    callFunctionPostOrder(node.right, function);
+    function(node);
   }
 }

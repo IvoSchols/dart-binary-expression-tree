@@ -1,3 +1,6 @@
+# 1.0.5
+- Added pre and post order function calls
+
 ## 1.0.4
 - BinaryExpressionTree: root may now be null
 

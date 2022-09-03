@@ -64,9 +64,38 @@ void main() {
   });
 
   test('toPostfixNotationComplex', () {
-    BinaryExpressionTree tree = BinaryExpressionTree.fromPostfix(
-        ['a', 'b', 'c', '*', '+', 'd', 'e', 'f', '+', '*', '+']);
-    expect(tree.toPostFix(),
-        ['a', 'b', 'c', '*', '+', 'd', 'e', 'f', '+', '*', '+']);
+    final postfixNotation = [
+      'a',
+      'b',
+      'c',
+      '*',
+      '+',
+      'd',
+      'e',
+      'f',
+      '+',
+      '*',
+      '+'
+    ];
+    BinaryExpressionTree tree =
+        BinaryExpressionTree.fromPostfix(postfixNotation);
+    expect(tree.toPostFix(), postfixNotation);
+  });
+
+  test('toPostfixWithNegation', () {
+    List<String> postfixNotation = ['a', 'b', '+', 'b', 'a', '!', '*', '-'];
+    BinaryExpressionTree tree =
+        BinaryExpressionTree.fromPostfix(postfixNotation);
+
+    expect(tree.root!.value, equals('-'));
+    expect(tree.root!.left!.value, equals('+'));
+    expect(tree.root!.right!.value, equals('*'));
+    expect(tree.root!.left!.left!.value, equals('a'));
+    expect(tree.root!.left!.right!.value, equals('b'));
+    expect(tree.root!.right!.left!.value, equals('b'));
+    expect(tree.root!.right!.right!.value, equals('!'));
+    expect(tree.root!.right!.right!.left!.value, equals('a'));
+
+    expect(tree.toPostFix(), postfixNotation);
   });
 }

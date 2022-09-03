@@ -21,8 +21,9 @@ void main() {
   });
 
   test('toPrefixNotationListSimple', () {
-    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(['+', 1, 2]);
-    expect(tree.toPreFix(), ['+', 1, 2]);
+    final prefixNotation = ['+', 1, 2];
+    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(prefixNotation);
+    expect(tree.toPreFix(), prefixNotation);
   });
 
   test('fromPrefixNotationListComplex', () {
@@ -64,9 +65,37 @@ void main() {
   });
 
   test('toPrefixNotationComplex', () {
-    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(
-        ['+', '+', 'a', '*', 'b', 'c', '*', 'd', '+', 'e', 'f']);
-    expect(tree.toPreFix(),
-        ['+', '+', 'a', '*', 'b', 'c', '*', 'd', '+', 'e', 'f']);
+    final prefixNotation = [
+      '+',
+      '+',
+      'a',
+      '*',
+      'b',
+      'c',
+      '*',
+      'd',
+      '+',
+      'e',
+      'f'
+    ];
+    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(prefixNotation);
+    expect(tree.toPreFix(), prefixNotation);
+  });
+
+  test('toPrefixWithNegation', () {
+    List<String> prefixNotation =
+        ['-', '+', 'a', 'b', '*', 'b', '!', 'a'].toList();
+    BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(prefixNotation);
+
+    expect(tree.root!.value, equals('-'));
+    expect(tree.root!.left!.value, equals('+'));
+    expect(tree.root!.right!.value, equals('*'));
+    expect(tree.root!.left!.left!.value, equals('a'));
+    expect(tree.root!.left!.right!.value, equals('b'));
+    expect(tree.root!.right!.left!.value, equals('b'));
+    expect(tree.root!.right!.right!.value, equals('!'));
+    expect(tree.root!.right!.right!.left!.value, equals('a'));
+
+    expect(tree.toPreFix(), prefixNotation);
   });
 }

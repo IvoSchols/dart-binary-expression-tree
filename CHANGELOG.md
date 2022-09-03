@@ -1,3 +1,6 @@
+# 1.0.6
+- Added negate support (w/ tests)
+
 # 1.0.5
 - Added pre and post order function calls
 

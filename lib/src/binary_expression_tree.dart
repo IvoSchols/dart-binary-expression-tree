@@ -116,4 +116,20 @@ class BinaryExpressionTree {
     callFunctionPostOrder(node.right, function);
     function(node);
   }
+
+  /// Deep copy of the expression tree.
+  BinaryExpressionTree copy() {
+    BinaryExpressionTree copyTree = BinaryExpressionTree();
+    copyTree.root = _copy(root);
+    return copyTree;
+  }
+
+  Node? _copy(Node? node) {
+    if (node == null) return null;
+
+    Node? copyNode = Node(node.value);
+    copyNode.left = _copy(node.left);
+    copyNode.right = _copy(node.right);
+    return copyNode;
+  }
 }

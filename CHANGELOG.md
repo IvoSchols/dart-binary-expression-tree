@@ -1,3 +1,6 @@
+# 1.0.8
+- Added rudimentary zip operation 
+
 # 1.0.7
 - Added deep copy of the expression tree
 

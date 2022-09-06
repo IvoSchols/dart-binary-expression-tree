@@ -132,4 +132,14 @@ class BinaryExpressionTree {
     copyNode.right = _copy(node.right);
     return copyNode;
   }
+
+  BinaryExpressionTree zip(Node binaryOperator, BinaryExpressionTree tree) {
+    BinaryExpressionTree thisTree = copy();
+    BinaryExpressionTree otherTree = tree.copy();
+    BinaryExpressionTree zipTree = BinaryExpressionTree();
+    zipTree.root = binaryOperator;
+    zipTree.root!.left = thisTree.root;
+    zipTree.root!.right = otherTree.root;
+    return zipTree;
+  }
 }

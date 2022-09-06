@@ -1,6 +1,6 @@
 name: binary_expression_tree
 description: A simple binary expression tree.
-version: 1.0.7
+version: 1.0.8
 homepage: https://github.com/IvoSchols/dart-binary-expression-tree
 
 environment:

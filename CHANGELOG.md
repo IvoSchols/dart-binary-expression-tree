@@ -1,3 +1,6 @@
+# 1.0.7
+- Added deep copy of the expression tree
+
 # 1.0.6
 - Added negate support (w/ tests)
 

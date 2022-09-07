@@ -142,4 +142,14 @@ class BinaryExpressionTree {
     zipTree.root!.right = otherTree.root;
     return zipTree;
   }
+
+  negate() {
+    if (root?.value == '!') {
+      root = root!.left;
+    } else {
+      Node negation = Node('!');
+      negation.left = root;
+      root = negation;
+    }
+  }
 }

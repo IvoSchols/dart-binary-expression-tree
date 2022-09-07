@@ -40,4 +40,31 @@ void main() {
     BinaryExpressionTree tree = BinaryExpressionTree(root: root);
     expect(tree.root!.left!.isOperator(), isTrue);
   });
+
+  test('isLeaf', () {
+    Node root = Node(null);
+    Node leaf = Node(1);
+    root.left = leaf;
+    BinaryExpressionTree tree = BinaryExpressionTree(root: root);
+    expect(tree.root!.isLeaf(), isFalse);
+    expect(tree.root!.left!.isLeaf(), isTrue);
+  });
+
+  test('negate', () {
+    Node root = Node('&&');
+    Node zero = Node(0);
+    Node one = Node(1);
+    root.left = zero;
+    root.right = one;
+    BinaryExpressionTree tree = BinaryExpressionTree(root: root);
+    tree.negate();
+    expect(tree.root!.value, equals('!'));
+    expect(tree.root!.left!.value, equals('&&'));
+    expect(tree.root!.left!.left!.value, equals(0));
+    expect(tree.root!.left!.right!.value, equals(1));
+    tree.negate();
+    expect(tree.root!.value, equals('&&'));
+    expect(tree.root!.left!.value, equals(0));
+    expect(tree.root!.right!.value, equals(1));
+  });
 }

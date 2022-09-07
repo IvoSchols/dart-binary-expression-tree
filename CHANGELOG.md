@@ -1,3 +1,6 @@
+# 1.0.9
+- Added negate binary expression tree
+
 # 1.0.8
 - Added rudimentary zip operation 
 

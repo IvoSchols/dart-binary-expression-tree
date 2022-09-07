@@ -133,7 +133,7 @@ class BinaryExpressionTree {
     return copyNode;
   }
 
-  BinaryExpressionTree zip(Node binaryOperator, BinaryExpressionTree tree) {
+  BinaryExpressionTree zip(BinaryExpressionTree tree, Node binaryOperator) {
     BinaryExpressionTree thisTree = copy();
     BinaryExpressionTree otherTree = tree.copy();
     BinaryExpressionTree zipTree = BinaryExpressionTree();

@@ -50,6 +50,31 @@ void main() {
     expect(tree.root!.left!.isLeaf(), isTrue);
   });
 
+  test('zip', () {
+    Node root = Node('+');
+    Node zero = Node(0);
+    Node one = Node(1);
+    root.left = zero;
+    root.right = one;
+    BinaryExpressionTree tree = BinaryExpressionTree(root: root);
+    Node root2 = Node('||');
+    Node a = Node('a');
+    Node b = Node('b');
+    root2.left = a;
+    root2.right = b;
+    BinaryExpressionTree tree2 = BinaryExpressionTree(root: root2);
+    Node operator = Node('&&');
+    BinaryExpressionTree zippedTree = tree.zip(tree2, operator);
+
+    expect(zippedTree.root!.value, equals('&&'));
+    expect(zippedTree.root!.left!.value, equals('+'));
+    expect(zippedTree.root!.right!.value, equals('||'));
+    expect(zippedTree.root!.left!.left!.value, equals(0));
+    expect(zippedTree.root!.left!.right!.value, equals(1));
+    expect(zippedTree.root!.right!.left!.value, equals('a'));
+    expect(zippedTree.root!.right!.right!.value, equals('b'));
+  });
+
   test('negate', () {
     Node root = Node('&&');
     Node zero = Node(0);

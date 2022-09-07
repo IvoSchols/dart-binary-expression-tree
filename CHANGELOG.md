@@ -1,3 +1,6 @@
+# 1.0.10
+- Added zip test
+
 # 1.0.9
 - Added negate binary expression tree
 

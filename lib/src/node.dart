@@ -26,10 +26,11 @@ class Node<T> {
 
   bool isLeaf() => left == null && right == null;
 
-  // Node is operator if is of type Char and contains: +, -, *, /, &&, ||, !, ==
+  // Node is operator if is of type Char and contains: +, -, *, /, &&, ||, !, == >=, <=, >, <,
   bool isOperator() =>
       value is String &&
-      const ['+', '-', '*', '/', '&&', '||', '!', '=='].contains(value);
+      const ['+', '-', '*', '/', '&&', '||', '!', '==', '>=', '<=', '>', '<']
+          .contains(value);
 
   // is numeric or boolean or 'variable'
   bool isOperand() =>

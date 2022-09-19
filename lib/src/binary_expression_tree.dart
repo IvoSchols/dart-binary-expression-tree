@@ -133,6 +133,7 @@ class BinaryExpressionTree {
     return copyNode;
   }
 
+  /// Zip the expression tree with another expression tree using the given operator and return a new expression tree.
   BinaryExpressionTree zip(BinaryExpressionTree tree, Node binaryOperator) {
     BinaryExpressionTree thisTree = copy();
     BinaryExpressionTree otherTree = tree.copy();

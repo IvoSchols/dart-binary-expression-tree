@@ -157,6 +157,7 @@ class BinaryExpressionTree {
   //Invert the condition tree operators
   BinaryExpressionTree invertedTree() {
     BinaryExpressionTree invertedTree = copy();
+    Node temp;
     invertedTree.callFunctionPreOrder(
         invertedTree.root,
         (Node node) => {
@@ -174,6 +175,15 @@ class BinaryExpressionTree {
                     {node.value = '!='}
                   else if (node.value == '!=')
                     {node.value = '=='}
+                  else if (node.value == '&&')
+                    {
+                      temp = Node(node.left),
+                      node.left = Node('!'),
+                      node.left!.left = temp,
+                      temp = Node(node.right),
+                      node.right = Node('!'),
+                      node.right!.left = temp,
+                    }
                   else
                     throw Exception('Unknown operator')
                 }

@@ -153,4 +153,31 @@ class BinaryExpressionTree {
       root = negation;
     }
   }
+
+  //Invert the condition tree operators
+  BinaryExpressionTree invertedTree() {
+    BinaryExpressionTree invertedTree = copy();
+    invertedTree.callFunctionPreOrder(
+        invertedTree.root,
+        (Node node) => {
+              if (node.hasChildren())
+                {
+                  if (node.value == '>=')
+                    {node.value = '<'}
+                  else if (node.value == '<=')
+                    {node.value = '>'}
+                  else if (node.value == '>')
+                    {node.value = '<='}
+                  else if (node.value == '<')
+                    {node.value = '>='}
+                  else if (node.value == '==')
+                    {node.value = '!='}
+                  else if (node.value == '!=')
+                    {node.value = '=='}
+                  else
+                    throw Exception('Unknown operator')
+                }
+            });
+    return invertedTree;
+  }
 }

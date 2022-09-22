@@ -157,13 +157,15 @@ class BinaryExpressionTree {
   //Invert the condition tree operators
   BinaryExpressionTree invertedTree() {
     BinaryExpressionTree invertedTree = copy();
-    Node temp;
+    Node? temp;
     invertedTree.callFunctionPreOrder(
         invertedTree.root,
         (Node node) => {
-              if (node.hasChildren())
+              if (node.isOperator())
                 {
-                  if (node.value == '>=')
+                  if (node.value == '!')
+                    {node.value = '||'}
+                  else if (node.value == '>=')
                     {node.value = '<'}
                   else if (node.value == '<=')
                     {node.value = '>'}
@@ -178,25 +180,25 @@ class BinaryExpressionTree {
                   else if (node.value == '&&')
                     {
                       node.value = '||',
-                      temp = Node(node.left),
+                      temp = node.left, //
                       node.left = Node('!'),
                       node.left!.left = temp,
-                      temp = Node(node.right),
+                      temp = node.right, //
                       node.right = Node('!'),
                       node.right!.left = temp,
                     }
                   else if (node.value == '||')
                     {
                       node.value = '&&',
-                      temp = Node(node.left),
+                      temp = node.left, //
                       node.left = Node('!'),
                       node.left!.left = temp,
-                      temp = Node(node.right),
+                      temp = node.right, //
                       node.right = Node('!'),
                       node.right!.left = temp,
                     }
                   else
-                    throw Exception('Unknown operator')
+                    throw Exception('Operator not supported')
                 }
             });
     return invertedTree;

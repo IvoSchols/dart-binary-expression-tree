@@ -185,6 +185,16 @@ class BinaryExpressionTree {
                       node.right = Node('!'),
                       node.right!.left = temp,
                     }
+                  else if (node.value == '||')
+                    {
+                      node.value = '&&',
+                      temp = Node(node.left),
+                      node.left = Node('!'),
+                      node.left!.left = temp,
+                      temp = Node(node.right),
+                      node.right = Node('!'),
+                      node.right!.left = temp,
+                    }
                   else
                     throw Exception('Unknown operator')
                 }

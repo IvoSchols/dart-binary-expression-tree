@@ -1,5 +1,5 @@
 class Node<T> {
-  final T value;
+  T value;
   Node? left;
   Node? right;
 

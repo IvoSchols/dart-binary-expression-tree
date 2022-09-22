@@ -156,51 +156,65 @@ class BinaryExpressionTree {
 
   //Invert the condition tree operators
   BinaryExpressionTree invertedTree() {
-    BinaryExpressionTree invertedTree = copy();
-    Node? temp;
-    invertedTree.callFunctionPreOrder(
-        invertedTree.root,
-        (Node node) => {
-              if (node.isOperator())
-                {
-                  if (node.value == '!')
-                    {node.value = '||'}
-                  else if (node.value == '>=')
-                    {node.value = '<'}
-                  else if (node.value == '<=')
-                    {node.value = '>'}
-                  else if (node.value == '>')
-                    {node.value = '<='}
-                  else if (node.value == '<')
-                    {node.value = '>='}
-                  else if (node.value == '==')
-                    {node.value = '!='}
-                  else if (node.value == '!=')
-                    {node.value = '=='}
-                  else if (node.value == '&&')
-                    {
-                      node.value = '||',
-                      temp = node.left, //
-                      node.left = Node('!'),
-                      node.left!.left = temp,
-                      temp = node.right, //
-                      node.right = Node('!'),
-                      node.right!.left = temp,
-                    }
-                  else if (node.value == '||')
-                    {
-                      node.value = '&&',
-                      temp = node.left, //
-                      node.left = Node('!'),
-                      node.left!.left = temp,
-                      temp = node.right, //
-                      node.right = Node('!'),
-                      node.right!.left = temp,
-                    }
-                  else
-                    throw Exception('Operator not supported')
-                }
-            });
+    BinaryExpressionTree invertedTree = BinaryExpressionTree();
+
+    // Perform a breadth first search on the tree, and invert the operators
+    // and add the inverted nodes to the inverted tree.
+    Queue<Node> queue = Queue();
+    queue.add(root!);
+    while (queue.isNotEmpty) {
+      Node node = queue.removeFirst();
+
+      if (node.value == '&&' || node.value == '||') {
+        Node invertedNode = Node(node.value);
+        if (invertedNode.value == '&&') {
+          invertedNode.value = '||';
+          Node temp = node.left!;
+          invertedNode.left = Node('!');
+          invertedNode.left!.left = temp;
+          temp = node.right!;
+          invertedNode.right = Node('!');
+          invertedNode.right!.left = temp;
+        } else if (invertedNode.value == '||') {
+          invertedNode.value = '&&';
+          Node temp = node.left!;
+          invertedNode.left = Node('!');
+          invertedNode.left!.left = temp;
+          temp = node.right!;
+          invertedNode.right = Node('!');
+          invertedNode.right!.left = temp;
+        }
+        invertedTree.root = invertedNode;
+      } else if (node.isOperator()) {
+        Node invertedNode = Node(node.value);
+
+        // Invert the operator.
+        if (invertedNode.value == '!') {
+          invertedNode = node.left!;
+          invertedTree.root = invertedNode;
+          continue;
+        } else if (invertedNode.value == '>=') {
+          invertedNode.value = '<';
+        } else if (invertedNode.value == '<=') {
+          invertedNode.value = '>';
+        } else if (invertedNode.value == '<') {
+          invertedNode.value = '>=';
+        } else if (invertedNode.value == '>') {
+          invertedNode.value = '<=';
+        } else if (invertedNode.value == '==') {
+          invertedNode.value = '!=';
+        } else if (invertedNode.value == '!=') {
+          invertedNode.value = '==';
+        } else {
+          throw Exception('Invalid operator');
+        }
+        invertedNode.left = node.left;
+        invertedNode.right = node.right;
+        queue.add(invertedNode.left!);
+        if (invertedNode.value != '!') queue.add(invertedNode.right!);
+        invertedTree.root = invertedNode;
+      }
+    }
     return invertedTree;
   }
 }

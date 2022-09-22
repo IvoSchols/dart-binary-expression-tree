@@ -102,10 +102,51 @@ void main() {
     BinaryExpressionTree tree = BinaryExpressionTree(root: root);
     BinaryExpressionTree invertedTree = tree.invertedTree();
     expect(invertedTree.root!.value, equals('||'));
+
     expect(invertedTree.root!.left!.value, equals('!'));
     expect(invertedTree.root!.right!.value, equals('!'));
+
     expect(invertedTree.root!.left!.left!.value, equals(0));
+    expect(invertedTree.root!.left!.right, isNull);
+
     expect(invertedTree.root!.right!.left!.value, equals(1));
+    expect(invertedTree.root!.right!.right, isNull);
+
+    expect(invertedTree.root!.left!.left!.left, isNull);
+    expect(invertedTree.root!.left!.left!.right, isNull);
+
+    expect(invertedTree.root!.right!.left!.left, isNull);
+    expect(invertedTree.root!.right!.left!.right, isNull);
+  });
+
+  test('invertedTreeInequality', () {
+    Node root = Node('>');
+    Node zero = Node(0);
+    Node one = Node(1);
+    root.left = zero;
+    root.right = one;
+    BinaryExpressionTree tree = BinaryExpressionTree(root: root);
+    BinaryExpressionTree invertedTree = tree.invertedTree();
+    expect(invertedTree.root!.value, equals('<='));
+    expect(invertedTree.root!.left!.value, equals(0));
+    expect(invertedTree.root!.right!.value, equals(1));
+    expect(invertedTree.root!.left!.left, isNull);
+    expect(invertedTree.root!.left!.right, isNull);
+    expect(invertedTree.root!.right!.left, isNull);
+    expect(invertedTree.root!.right!.right, isNull);
+  });
+
+  test('invertedTreeEquality', () {
+    Node root = Node('==');
+    Node zero = Node(0);
+    Node one = Node(1);
+    root.left = zero;
+    root.right = one;
+    BinaryExpressionTree tree = BinaryExpressionTree(root: root);
+    BinaryExpressionTree invertedTree = tree.invertedTree();
+    expect(invertedTree.root!.value, equals('!='));
+    expect(invertedTree.root!.left!.value, equals(0));
+    expect(invertedTree.root!.right!.value, equals(1));
   });
 
   test('invertedTreeOr', () {
@@ -120,7 +161,16 @@ void main() {
     expect(invertedTree.root!.left!.value, equals('!'));
     expect(invertedTree.root!.right!.value, equals('!'));
     expect(invertedTree.root!.left!.left!.value, equals(0));
+    expect(invertedTree.root!.left!.right, isNull);
+
     expect(invertedTree.root!.right!.left!.value, equals(1));
+    expect(invertedTree.root!.right!.right, isNull);
+
+    expect(invertedTree.root!.left!.left!.left, isNull);
+    expect(invertedTree.root!.left!.left!.right, isNull);
+
+    expect(invertedTree.root!.right!.left!.left, isNull);
+    expect(invertedTree.root!.right!.left!.right, isNull);
   });
 
   test('invertedTreeNot', () {
@@ -129,8 +179,8 @@ void main() {
     root.left = zero;
     BinaryExpressionTree tree = BinaryExpressionTree(root: root);
     BinaryExpressionTree invertedTree = tree.invertedTree();
-    expect(invertedTree.root!.value, equals('||'));
-    expect(invertedTree.root!.left!.value, equals(0));
+    expect(invertedTree.root!.value, equals(0));
+    expect(invertedTree.root!.left?.value, equals(null));
     expect(invertedTree.root!.right?.value, equals(null));
   });
 }

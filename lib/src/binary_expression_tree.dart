@@ -177,6 +177,7 @@ class BinaryExpressionTree {
                     {node.value = '=='}
                   else if (node.value == '&&')
                     {
+                      node.value = '||',
                       temp = Node(node.left),
                       node.left = Node('!'),
                       node.left!.left = temp,

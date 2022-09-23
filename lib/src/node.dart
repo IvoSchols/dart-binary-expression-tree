@@ -49,6 +49,45 @@ class Node<T> {
   bool isOperand() =>
       value is num || value is bool || (value is String && !isOperator());
 
+  /// Invert the operator of the node
+  void invertOperator() {
+    if (value == '&&') {
+      value = '||' as T;
+      Node temp = left!;
+      left = Node('!');
+      left!.left = temp;
+      temp = right!;
+      right = Node('!');
+      right!.left = temp;
+    } else if (value == '||') {
+      value = '&&' as T;
+      Node temp = left!;
+      left = Node('!');
+      left!.left = temp;
+      temp = right!;
+      right = Node('!');
+      right!.left = temp;
+    } else if (value == '==') {
+      value = '!=' as T;
+    } else if (value == '!=') {
+      value = '==' as T;
+    } else if (value == '>') {
+      value = '<=' as T;
+    } else if (value == '<') {
+      value = '>=' as T;
+    } else if (value == '>=') {
+      value = '<' as T;
+    } else if (value == '<=') {
+      value = '>' as T;
+    } else if (value == '!') {
+      value = left!.value;
+      left = left!.left;
+      right = left?.right;
+    } else {
+      throw Exception('Invalid operator');
+    }
+  }
+
   // To Dart interpretable string
   String toDart() {
     return 'Node($value)';

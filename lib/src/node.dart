@@ -92,4 +92,12 @@ class Node<T> {
   String toDart() {
     return 'Node($value)';
   }
+
+  // Deep copy of the node and its children
+  Node deepCopy() {
+    Node copy = Node(value);
+    if (left != null) copy.left = left!.deepCopy();
+    if (right != null) copy.right = right!.deepCopy();
+    return copy;
+  }
 }

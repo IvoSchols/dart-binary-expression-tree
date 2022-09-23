@@ -183,4 +183,23 @@ void main() {
     expect(invertedTree.root!.left?.value, equals(null));
     expect(invertedTree.root!.right?.value, equals(null));
   });
+
+  test('simpleDeepCopy', () {
+    Node root = Node('&&');
+    Node zero = Node(0);
+    Node one = Node(1);
+    root.left = zero;
+    root.right = one;
+    Node copy = root.deepCopy();
+    expect(root.hashCode, isNot(equals(copy.hashCode)));
+    expect(copy.value, equals('&&'));
+    expect(copy.left!.value, equals(0));
+    expect(root.left!.hashCode, isNot(equals(copy.left!.hashCode)));
+    expect(copy.right!.value, equals(1));
+    expect(root.right!.hashCode, isNot(equals(copy.right!.hashCode)));
+    expect(copy.left!.left, isNull);
+    expect(copy.left!.right, isNull);
+    expect(copy.right!.left, isNull);
+    expect(copy.right!.right, isNull);
+  });
 }

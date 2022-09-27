@@ -125,12 +125,7 @@ class BinaryExpressionTree {
   }
 
   Node? _copy(Node? node) {
-    if (node == null) return null;
-
-    Node? copyNode = Node(node.value);
-    copyNode.left = _copy(node.left);
-    copyNode.right = _copy(node.right);
-    return copyNode;
+    return root?.deepCopy();
   }
 
   /// Zip the expression tree with another expression tree using the given operator and return a new expression tree.

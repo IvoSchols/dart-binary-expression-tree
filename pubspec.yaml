@@ -1,5 +1,5 @@
 name: binary_expression_tree
-description: A simple binary expression tree.
+description: A simple binary expression tree with built in method, operator and operand support. Allows unary operators.
 version: 1.0.10
 homepage: https://github.com/IvoSchols/dart-binary-expression-tree
 

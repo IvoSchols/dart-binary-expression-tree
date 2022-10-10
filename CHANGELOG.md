@@ -1,4 +1,4 @@
-# 1.0.10
+# 1.1.0
 - Used LCOV to bring test coverage to 99%
 
 # 1.0.10

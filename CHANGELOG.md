@@ -1,4 +1,7 @@
 # 1.0.10
+- Used LCOV to bring test coverage to 99%
+
+# 1.0.10
 - Added zip test
 
 # 1.0.9

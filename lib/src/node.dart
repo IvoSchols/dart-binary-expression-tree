@@ -79,7 +79,7 @@ class Node<T> {
       value = '<' as T;
     } else if (value == '<=') {
       value = '>' as T;
-    } else if (value == '!') {
+    } else if (value == '!' && left != null) {
       value = left!.value;
       left = left!.left;
       right = left?.right;
@@ -90,7 +90,8 @@ class Node<T> {
 
   // To Dart interpretable string
   String toDart() {
-    return 'Node($value)';
+    if (value is String) return "Node('$value');";
+    return 'Node($value);';
   }
 
   // Deep copy of the node and its children

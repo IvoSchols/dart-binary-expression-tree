@@ -1,9 +1,19 @@
+import 'dart:math';
+
 import 'package:binary_expression_tree/binary_expression_tree.dart';
 import 'package:test/test.dart';
 
 void main() {
-  //TODO: add failing tests
-  //TODO: add boolean tests
+  test('emptyFromPrefix', () {
+    expect(
+        () => BinaryExpressionTree.fromPrefix([]), throwsA(isA<Exception>()));
+  });
+
+  test('invalidFromPrefix', () {
+    expect(() => BinaryExpressionTree.fromPrefix([null]),
+        throwsA(isA<Exception>()));
+  });
+
   test('fromPrefixNotationListSimple', () {
     BinaryExpressionTree tree = BinaryExpressionTree.fromPrefix(['+', 1, 2]);
     expect(tree.root!.value, '+');

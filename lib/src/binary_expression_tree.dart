@@ -16,10 +16,6 @@ class BinaryExpressionTree {
     Iterator<dynamic> iterator = prefix.iterator;
     Node? prefixNode = _fromPrefix(prefix, iterator);
 
-    if (prefixNode == null) {
-      throw Exception('Invalid prefix notation');
-    }
-
     root = prefixNode;
   }
 
@@ -68,13 +64,10 @@ class BinaryExpressionTree {
 
     Node? postfixNode = _fromPostfix(postfix, listQueue);
 
-    if (postfixNode == null) {
-      throw Exception('Invalid postfix notation');
-    }
     root = postfixNode;
   }
 
-  Node? _fromPostfix(List<dynamic> postfix, ListQueue<Node> listQueue) {
+  Node _fromPostfix(List<dynamic> postfix, ListQueue<Node> listQueue) {
     for (int i = 0; i < postfix.length; i++) {
       Node current = Node(postfix[i]);
 
@@ -92,10 +85,6 @@ class BinaryExpressionTree {
         current.left = listQueue.removeLast();
         listQueue.add(current);
       }
-    }
-
-    if (listQueue.length != 1) {
-      throw Exception('Invalid postfix notation');
     }
 
     return listQueue.removeLast();
@@ -182,31 +171,22 @@ class BinaryExpressionTree {
         invertedTree.root = invertedNode;
       } else if (node.isOperator()) {
         Node invertedNode = Node(node.value);
-
-        // Invert the operator.
-        if (invertedNode.value == '!') {
-          invertedNode = node.left!;
-          invertedTree.root = invertedNode;
-          continue;
-        } else if (invertedNode.value == '>=') {
-          invertedNode.value = '<';
-        } else if (invertedNode.value == '<=') {
-          invertedNode.value = '>';
-        } else if (invertedNode.value == '<') {
-          invertedNode.value = '>=';
-        } else if (invertedNode.value == '>') {
-          invertedNode.value = '<=';
-        } else if (invertedNode.value == '==') {
-          invertedNode.value = '!=';
-        } else if (invertedNode.value == '!=') {
-          invertedNode.value = '==';
-        } else {
-          throw Exception('Invalid operator');
-        }
         invertedNode.left = node.left;
         invertedNode.right = node.right;
-        queue.add(invertedNode.left!);
-        if (invertedNode.value != '!') queue.add(invertedNode.right!);
+
+        // Invert the operator.
+        if (invertedNode.value == '&&' || invertedNode.value == '||') {
+          throw Exception('Operator {$invertedNode.value} is not supported.');
+        } else {
+          invertedNode.invertOperator();
+        }
+
+        if (invertedNode.left != null) {
+          queue.add(invertedNode.left!);
+        }
+        if (invertedNode.value != '!' && invertedNode.right != null) {
+          queue.add(invertedNode.right!);
+        }
         invertedTree.root = invertedNode;
       }
     }

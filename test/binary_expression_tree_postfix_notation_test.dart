@@ -2,8 +2,26 @@ import 'package:binary_expression_tree/binary_expression_tree.dart';
 import 'package:test/test.dart';
 
 void main() {
-  //TODO: add failing tests
-  //TODO: add boolean tests
+  test('emptyFromPostfix', () {
+    expect(
+        () => BinaryExpressionTree.fromPostfix([]), throwsA(isA<Exception>()));
+  });
+
+  test('invalidFromPostfixSimple', () {
+    expect(() => BinaryExpressionTree.fromPostfix([null]),
+        throwsA(isA<Exception>()));
+  });
+
+  test('invalidFromPostfixSimple', () {
+    expect(() => BinaryExpressionTree.fromPostfix([null]),
+        throwsA(isA<Exception>()));
+  });
+
+  test('invalidFromPostfixOperatorCount', () {
+    expect(() => BinaryExpressionTree.fromPostfix(["+", 1]),
+        throwsA(isA<Exception>()));
+  });
+
   test('fromPostfixNotationListSimple', () {
     BinaryExpressionTree tree = BinaryExpressionTree.fromPostfix([1, 2, '+']);
     expect(tree.root!.value, '+');

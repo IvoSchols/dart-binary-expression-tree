@@ -101,6 +101,11 @@ void main() {
       expect(root.isOperand(), isTrue);
     });
 
+    test('invertUnsupportedOperator', () {
+      Node root = Node(null);
+      expect(() => root.invertOperator(), throwsException);
+    });
+
     test('invertInequality', () {
       String startingOperator = '>';
       Node root = Node(startingOperator);
@@ -112,6 +117,18 @@ void main() {
       root.invertOperator();
       expect(root.value, equals('>'));
       expect(root.getChildren()[0].value, equals(1));
+    });
+
+    test('invertEqualityRegressionLess', () {
+      Node less = Node('<');
+      less.invertOperator();
+      expect(less.value, equals('>='));
+    });
+
+    test('invertEqualityRegressionGreaterEqual', () {
+      Node greaterEqual = Node('>=');
+      greaterEqual.invertOperator();
+      expect(greaterEqual.value, equals('<'));
     });
 
     test('invertEquality', () {
@@ -203,6 +220,18 @@ void main() {
       root.invertOperator();
       expect(root.value, equals('!'));
       expect(root.left!.value, equals(1));
+    });
+
+    test('toDartNodeOperator', () {
+      Node root = Node('&&');
+      String result = root.toDart();
+      expect(result, equals("Node('&&');"));
+    });
+
+    test('toDartNodeNumeric', () {
+      Node root = Node(1);
+      String result = root.toDart();
+      expect(result, equals("Node(1);"));
     });
   });
 }

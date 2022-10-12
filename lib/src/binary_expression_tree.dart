@@ -128,16 +128,6 @@ class BinaryExpressionTree {
     return zipTree;
   }
 
-  negate() {
-    if (root?.value == '!') {
-      root = root!.left;
-    } else {
-      Node negation = Node('!');
-      negation.left = root;
-      root = negation;
-    }
-  }
-
   //Invert the condition tree operators
   BinaryExpressionTree invertedTree() {
     BinaryExpressionTree invertedTree = BinaryExpressionTree();

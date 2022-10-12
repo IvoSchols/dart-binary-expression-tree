@@ -73,24 +73,6 @@ void main() {
     expect(zippedTree.root!.right!.right!.value, equals('b'));
   });
 
-  test('negate', () {
-    Node root = Node('&&');
-    Node zero = Node(0);
-    Node one = Node(1);
-    root.left = zero;
-    root.right = one;
-    BinaryExpressionTree tree = BinaryExpressionTree(root: root);
-    tree.negate();
-    expect(tree.root!.value, equals('!'));
-    expect(tree.root!.left!.value, equals('&&'));
-    expect(tree.root!.left!.left!.value, equals(0));
-    expect(tree.root!.left!.right!.value, equals(1));
-    tree.negate();
-    expect(tree.root!.value, equals('&&'));
-    expect(tree.root!.left!.value, equals(0));
-    expect(tree.root!.right!.value, equals(1));
-  });
-
   test('invertedTreeAnd', () {
     Node root = Node('&&');
     Node zero = Node(0);

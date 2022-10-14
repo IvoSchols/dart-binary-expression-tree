@@ -103,7 +103,10 @@ void main() {
 
     test('invertUnsupportedOperator', () {
       Node root = Node(null);
-      expect(() => root.invert(), throwsException);
+      root.invert();
+      expect(root.value, '!');
+      expect(root.left!.value, null);
+      expect(root.right?.value, null);
     });
 
     test('invertInequality', () {

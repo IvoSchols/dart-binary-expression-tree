@@ -1,3 +1,8 @@
+# 1.1.2
+
+- Changed invertOperator into invert
+- Altered behavior of invert in default case (now just negates)
+
 # 1.1.1
 
 - Removed negate from binary expression tree, as it is already present in node as invertOperator

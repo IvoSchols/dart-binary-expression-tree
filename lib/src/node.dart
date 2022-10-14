@@ -50,7 +50,7 @@ class Node<T> {
       value is num || value is bool || (value is String && !isOperator());
 
   /// Invert the operator of the node
-  void invertOperator() {
+  void invert() {
     if (value == '&&') {
       value = '||' as T;
       Node temp = left!;
@@ -84,7 +84,14 @@ class Node<T> {
       left = left!.left;
       right = left?.right;
     } else {
-      throw Exception('Invalid operator');
+      //Potentially harmful function
+      Node temp = Node(value);
+      temp.left = left;
+      temp.right = right;
+
+      value = '!' as T;
+      left = temp;
+      right = null;
     }
   }
 

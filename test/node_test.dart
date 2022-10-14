@@ -103,7 +103,7 @@ void main() {
 
     test('invertUnsupportedOperator', () {
       Node root = Node(null);
-      expect(() => root.invertOperator(), throwsException);
+      expect(() => root.invert(), throwsException);
     });
 
     test('invertInequality', () {
@@ -111,23 +111,23 @@ void main() {
       Node root = Node(startingOperator);
       Node leaf = Node(1);
       root.addChild(leaf);
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('<='));
       expect(root.getChildren()[0].value, equals(1));
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('>'));
       expect(root.getChildren()[0].value, equals(1));
     });
 
     test('invertEqualityRegressionLess', () {
       Node less = Node('<');
-      less.invertOperator();
+      less.invert();
       expect(less.value, equals('>='));
     });
 
     test('invertEqualityRegressionGreaterEqual', () {
       Node greaterEqual = Node('>=');
-      greaterEqual.invertOperator();
+      greaterEqual.invert();
       expect(greaterEqual.value, equals('<'));
     });
 
@@ -136,10 +136,10 @@ void main() {
       Node root = Node(startingOperator);
       Node leaf = Node(1);
       root.addChild(leaf);
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('!='));
       expect(root.getChildren()[0].value, equals(1));
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('=='));
       expect(root.getChildren()[0].value, equals(1));
     });
@@ -151,7 +151,7 @@ void main() {
       Node leaf2 = Node(2);
       root.addChild(leaf);
       root.addChild(leaf2);
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('||'));
       expect(root.left!.value, equals('!'));
       expect(root.right!.value, equals('!'));
@@ -167,13 +167,13 @@ void main() {
       Node leaf2 = Node(2);
       root.addChild(leaf);
       root.addChild(leaf2);
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('||'));
       expect(root.left!.value, equals('!'));
       expect(root.right!.value, equals('!'));
       expect(root.left!.left!.value, equals(1));
       expect(root.right!.left!.value, equals(2));
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('&&'));
       expect(root.left!.value, equals('!'));
       expect(root.left!.left!.value, equals('!'));
@@ -195,7 +195,7 @@ void main() {
       Node leaf2 = Node(2);
       root.addChild(leaf);
       root.addChild(leaf2);
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('&&'));
       expect(root.left!.value, equals('!'));
       expect(root.right!.value, equals('!'));
@@ -207,7 +207,7 @@ void main() {
       Node root = Node('!');
       Node leaf = Node(1);
       root.addChild(leaf);
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals(1));
     });
 
@@ -217,7 +217,7 @@ void main() {
       Node leaf2 = Node(1);
       root.addChild(leaf);
       leaf.addChild(leaf2);
-      root.invertOperator();
+      root.invert();
       expect(root.value, equals('!'));
       expect(root.left!.value, equals(1));
     });

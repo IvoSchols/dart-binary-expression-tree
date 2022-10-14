@@ -168,7 +168,7 @@ class BinaryExpressionTree {
         if (invertedNode.value == '&&' || invertedNode.value == '||') {
           throw Exception('Operator {$invertedNode.value} is not supported.');
         } else {
-          invertedNode.invertOperator();
+          invertedNode.invert();
         }
 
         if (invertedNode.left != null) {
